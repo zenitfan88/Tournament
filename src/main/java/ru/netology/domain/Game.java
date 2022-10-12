@@ -1,15 +1,16 @@
 package ru.netology.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Game {
 
-    protected List<Player> players = new ArrayList<>();
-
+    protected Map<String, Player> players = new HashMap<>();
 
     public void register(Player player) {
-        players.add(player);
+        players.put(player.getName(), player);
     }
 
     public int findByName(String name) {
@@ -24,18 +25,17 @@ public class Game {
 
     public int round(String name1, String name2) {
         int result = 0;
-        int playerName1 = findByName(name1);
-        int playerName2 = findByName(name2);
-
-        if (playerName1 == -1) {
+        Player player1 = players.get(name1);
+        Player player2 = players.get(name2);
+        if (player1 == null) {
             throw new NotFoundException("Игрок " + name1 + " не зарегистрирован");
         }
-        if (playerName2 == -1) {
+        if (player2 == null) {
             throw new NotFoundException("Игрок " + name2 + " не зарегистрирован");
         }
 
-        int playerStr1 = players.get(playerName1).getStrength();
-        int playerStr2 = players.get(playerName2).getStrength();
+        int playerStr1 = player1.getStrength();
+        int playerStr2 = player2.getStrength();
 
         if (playerStr1 > playerStr2) {
             result = 1;
