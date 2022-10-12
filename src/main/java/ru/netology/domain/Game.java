@@ -1,6 +1,7 @@
 package ru.netology.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Game {
@@ -8,9 +9,14 @@ public class Game {
     protected List<Player> players = new ArrayList<>();
 
 
-    public void register(Player player) {
+    public void save(Player player) {
         players.add(player);
     }
+
+    public void register(List<Player> player) {
+        players.addAll(player);
+    }
+
 
     public int findByName(String name) {
         for (int i = 0; i < players.size(); i++) {

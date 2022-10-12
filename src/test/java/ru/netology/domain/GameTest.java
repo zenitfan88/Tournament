@@ -2,6 +2,7 @@ package ru.netology.domain;
 
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,42 +17,28 @@ public class GameTest {
     Player player2 = new Player(347, "Lexy", 18);
     Player player3 = new Player(447, "Lika", 7);
 
+    @BeforeEach
+    void startUp() {
+        manager.register(List.of(player1, player2, player, player3));
+    }
+
     @Test
     void winFirstPlayer() {
-        manager.register(player);
-        manager.register(player1);
-        manager.register(player2);
-        manager.register(player3);
-
         assertEquals(1, manager.round("Max", "Lika"));
     }
 
     @Test
     void winSecondPlayer() {
-        manager.register(player);
-        manager.register(player1);
-        manager.register(player2);
-        manager.register(player3);
-
         assertEquals(2, manager.round("Max", "Lex"));
     }
 
     @Test
     void drawPlayer() {
-        manager.register(player);
-        manager.register(player1);
-        manager.register(player2);
-        manager.register(player3);
-
         assertEquals(0, manager.round("Max", "Lexy"));
     }
 
     @Test
     void playerNotRegister() {
-        manager.register(player);
-        manager.register(player1);
-        manager.register(player2);
-
         assertThrows(NotFoundException.class, () -> {
             manager.round("Max", "Mike");
         });
