@@ -9,6 +9,9 @@ public class Game {
 
     protected Map<String, Player> players = new HashMap<>();
 
+//    public void register(Player player) {
+//        players.put(player.getName(), player);
+//    }
     public void register(Player player) {
         players.put(player.getName(), player);
     }
